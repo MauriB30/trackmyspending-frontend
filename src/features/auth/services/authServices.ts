@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { api } from '../../../services/api';
-import type { LoginResponse } from '../../../types/authResponses';
+import type { LoginResponse, RegisterResponse } from '../../../types/authResponses';
 import type User from '../../../types/user';
 
 export async function apiLogin(email: string, password: string): Promise<LoginResponse> {
@@ -25,29 +25,30 @@ export async function apiLogin(email: string, password: string): Promise<LoginRe
 
 export async function apiLogout() {
     try {
-       const response = await api.post('/auth/logout');
-       console.log(response);
+        const response = await api.post('/auth/logout');
+        console.log(response);
     } catch (error) {
         console.log(error);
     }
 }
 
-export async function apiRegister(name: string, email: string, password: string) {
+export async function apiRegister(name: string, email: string, password: string): Promise<RegisterResponse> {
     try {
-        const response = await api.post(`/auth/register`, {
+        await api.post(`/auth/register`, {
             name,
             email,
             password,
         });
-        console.log(response);
+
+        return { success: true, message: 'Usuario registrado con éxito' };
     } catch (error) {
         console.log(error);
         if (error instanceof AxiosError) {
             if (error.response?.status === 400) {
-                return { error: error.response.data };
+                return { success: false, message: error.response.data };
             }
         }
-        return { error: 'Ocurrió un error inesperado' };
+        return { success: false, message: 'Ocurrió un error inesperado' };
     }
 }
 

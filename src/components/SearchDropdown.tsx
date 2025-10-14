@@ -1,7 +1,7 @@
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useRef, useState } from 'react';
-import useClickOutside from '../../hooks/useClickOutside';
-import useFilter from '../../hooks/useFilter';
-import DropdownIcon from '../icons/DropdownIcon';
+import useClickOutside from '../hooks/useClickOutside';
+import useFilter from '../hooks/useFilter';
 
 interface Option {
     id: number;
@@ -59,7 +59,7 @@ export default function SearchDropdown({ options }: Props) {
                 ) : (
                     <div className='flex justify-between px-5 py-1'>
                         <span>{selectedOption ? selectedOption : 'Selecciona una moneda'}</span>
-                        <DropdownIcon />
+                        <ArrowDropDownIcon />
                     </div>
                 )}
             </div>

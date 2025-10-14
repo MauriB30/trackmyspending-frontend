@@ -32,7 +32,11 @@ export default function Register() {
     } = useForm<RegisterType>({ resolver: zodResolver(registerSchema) });
 
     async function handleRegisterSubmit(data: RegisterType) {
-        await registerUser(data.name, data.email, data.password);
+        const { message, success } = await registerUser(data.name, data.email, data.password);
+        
+        if (!success) {
+            setServerError(message);
+        }
     }
 
     return (

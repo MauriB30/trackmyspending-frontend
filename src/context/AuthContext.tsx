@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import type { RegisterResponse } from '../types/authResponses';
 import type User from '../types/user';
 
 export interface AuthContextProps {
@@ -6,7 +7,7 @@ export interface AuthContextProps {
     isLoading: boolean;
     login(username: string, password: string, rememberMe: boolean): Promise<string | undefined>;
     logout(): void;
-    register(name: string, username: string, password: string): void;
+    register(name: string, username: string, password: string): Promise<RegisterResponse>;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);

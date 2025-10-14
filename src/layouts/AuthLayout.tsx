@@ -1,4 +1,4 @@
-import fondo from '../assets/images/fondo.png';
+import fondoOptimized from '../assets/images/fondowebp.webp';
 
 interface Props {
     children: React.ReactNode;
@@ -6,7 +6,10 @@ interface Props {
 
 export default function AuthLayout({ children }: Props) {
     return (
-        <main className='auth-section h-screen' style={{ backgroundImage: `url(${fondo})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <main
+            className='auth-section h-screen'
+            style={{ backgroundImage: `url(${fondoOptimized})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        >
             <section className='grid h-full grid-cols-2 text-white'>
                 <div className='flex flex-col items-center gap-10'>
                     <h2 className='mt-52 text-center text-6xl'>Track My Spending</h2>
