@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router';
@@ -26,7 +27,7 @@ export default function Login() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { isSubmitting, errors },
     } = useForm<LoginType>({ resolver: zodResolver(loginSchema) });
 
     async function handleLoginSubmit(data: LoginType) {
@@ -50,7 +51,7 @@ export default function Login() {
                 <CheckBox checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
                 <p>Recuérdame</p>
             </div>
-            <Button type='submit'>Acceder</Button>
+            <Button type='submit'>{isSubmitting ? <CircularProgress size={24} color='inherit' /> : 'Acceder'}</Button>
 
             <div className='flex flex-col gap-2'>
                 {serverError && <p className='text-error text-center'>{serverError}</p>}
