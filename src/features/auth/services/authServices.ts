@@ -54,7 +54,7 @@ export async function apiRegister(name: string, email: string, password: string)
 
 export async function apiCheckSession(): Promise<User | null> {
     try {
-        const response = await api.get('/users/me');
+        const response = await api.get('/user/me');
         console.log(response);
 
         const user: User = response.data;

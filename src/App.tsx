@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router';
 import AuthProvider from './context/AuthProvider';
 import PrivateRoutes from './features/auth/components/PrivateRoutes';
 import PublicRoutes from './features/auth/components/PublicRoutes';
-import NotFound from './layouts/NotFound';
 import Loading from './layouts/Loading';
+import NotFound from './layouts/NotFound';
 
 const Home = lazy(() => import('./features/home/pages/Home'));
 const Login = lazy(() => import('./features/auth/pages/Login'));
@@ -15,15 +15,21 @@ const ResetPassword = lazy(() => import('./features/auth/pages/ResetPassword'));
 const Profile = lazy(() => import('./features/profile/pages/Profile'));
 const ProfileInfo = lazy(() => import('./features/profile/pages/ProfileInfo'));
 const ChangePassword = lazy(() => import('./features/profile/pages/ChangePassword'));
-const Wallets = lazy(() => import('./pages/Wallets/Wallets'));
-const Currencies = lazy(() => import('./pages/Currencies/Currencies'));
-const Transactions = lazy(() => import('./pages/Transactions/Transactions'));
-const Categories = lazy(() => import('./pages/Categories/Categories'));
+const Wallets = lazy(() => import('./features/wallets/pages/Wallets'));
+const Currencies = lazy(() => import('./features/currencies/pages/Currencies'));
+const Transactions = lazy(() => import('./features/transactions/pages/Transactions'));
+const Categories = lazy(() => import('./features/categories/pages/Categories'));
 
 export default function App() {
     return (
         <AuthProvider>
-            <Suspense fallback={<div className='loading-screen'><Loading/></div>}>
+            <Suspense
+                fallback={
+                    <div className='loading-screen'>
+                        <Loading />
+                    </div>
+                }
+            >
                 <Routes>
                     <Route element={<PublicRoutes />}>
                         <Route path='/login' element={<Login />} />

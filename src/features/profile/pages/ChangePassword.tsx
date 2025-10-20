@@ -1,15 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 import Button from '../../../components/Button';
-import FormField from '../../../components/Form/FormField';
+import FormField from '../../../components/form/FormField';
+import { apiChangePassword } from '../services/profileServices';
 
 const changePasswordSchema = z
     .object({
-        currentPassword: z.string().min(6, 'La nueva contraseña debe tener al menos 6 caracteres'),
-        newPassword: z.string().min(6, 'La nueva contraseña debe tener al menos 6 caracteres'),
-        newPasswordConfirm: z.string().min(6, 'Debe confirmar la nueva contraseña'),
+        currentPassword: z.string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres'),
+        newPassword: z.string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres'),
+        newPasswordConfirm: z.string().min(8, 'Debe confirmar la nueva contraseña'),
     })
     .refine((data) => data.newPassword === data.newPasswordConfirm, {
         message: 'Las contraseñas no coinciden',
@@ -26,8 +28,16 @@ export default function ChangePassword() {
         formState: { errors },
     } = useForm<changePasswordType>({ resolver: zodResolver(changePasswordSchema) });
 
-    async function handleChangePassword(data: changePasswordType) {
-        console.log(data);
+    async function handleChangePassword(formData: changePasswordType) {
+        const { currentPassword, newPassword } = formData;
+        const { error } = await apiChangePassword(currentPassword, newPassword);
+
+        if (error) {
+            toast.error(error);
+            return;
+        }
+
+        toast.success('Contraseña cambiada con éxito');
     }
 
     return (

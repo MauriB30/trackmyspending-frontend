@@ -5,8 +5,8 @@ import { NavLink, useNavigate } from 'react-router';
 import z from 'zod';
 import Button from '../../../components/Button';
 import CheckBox from '../../../components/CheckBox';
-import FormField from '../../../components/Form/FormField';
-import PasswordField from '../../../components/Form/PasswordField';
+import FormField from '../../../components/form/FormField';
+import PasswordField from '../../../components/form/PasswordField';
 import { useAuth } from '../../../hooks/UseAuth';
 import AuthTabs from '../components/AuthTabs';
 

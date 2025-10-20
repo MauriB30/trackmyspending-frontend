@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import Button from '../../../components/Button';
-import FormField from '../../../components/Form/FormField';
+import FormField from '../../../components/form/FormField';
 import { AuthContext } from '../../../context/AuthContext';
 import AuthTabs from '../components/AuthTabs';
 
@@ -33,7 +33,7 @@ export default function Register() {
 
     async function handleRegisterSubmit(data: RegisterType) {
         const { message, success } = await registerUser(data.name, data.email, data.password);
-        
+
         if (!success) {
             setServerError(message);
         }

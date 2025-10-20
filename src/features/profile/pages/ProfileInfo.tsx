@@ -1,11 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
 import Button from '../../../components/Button';
-import FormField from '../../../components/Form/FormField';
+import FormField from '../../../components/form/FormField';
 import LinkButton from '../../../components/LinkButton';
 import { AuthContext } from '../../../context/AuthContext';
+import { apiUpdateUser } from '../services/profileServices';
 
 const editProfileSchema = z.object({
     name: z.string('El nombre no es valido').min(1, 'El nombre es requerido'),
@@ -24,15 +26,23 @@ export default function ProfileInfo() {
         formState: { errors },
     } = useForm<editProfileType>({ resolver: zodResolver(editProfileSchema) });
 
-    async function handleEdit(data: editProfileType) {
+    async function handleEdit(formData: editProfileType) {
+        const { name, email } = formData;
+
         if (!isEditing) {
             setIsEditing(true);
             return;
         }
 
-        //const { success, message } = await apiEditUser(user!.userid, data.name, data.username);
-        console.log(data);
+        const { error } = await apiUpdateUser(name, email);
 
+        if (error) {
+            toast.error(error);
+            setIsEditing(false);
+            return;
+        }
+
+        toast.success('Perfil actualizado con éxito');
         setIsEditing(false);
     }
 
