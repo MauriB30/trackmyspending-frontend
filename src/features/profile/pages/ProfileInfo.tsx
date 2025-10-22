@@ -51,10 +51,23 @@ export default function ProfileInfo() {
         logout();
     }
     return (
-        <div className='bg-secondary w-full max-w-[900px] space-y-5 rounded p-5'>
+        <div className='w-full max-w-[900px] space-y-5 rounded border border-slate-700/50 bg-slate-800/30 p-8'>
             <form onSubmit={handleSubmit(handleEdit)} className='space-y-5'>
-                <FormField register={register('name')} defaultValue={user?.name} disabled={!isEditing} error={errors.name?.message} />
-                <FormField register={register('email')} defaultValue={user?.email} disabled={!isEditing} error={errors.email?.message} />
+                <FormField
+                    className=''
+                    label='Nombre'
+                    register={register('name')}
+                    defaultValue={user?.name}
+                    disabled={!isEditing}
+                    error={errors.name?.message}
+                />
+                <FormField
+                    label='Email'
+                    register={register('email')}
+                    defaultValue={user?.email}
+                    disabled={!isEditing}
+                    error={errors.email?.message}
+                />
 
                 <div className='action-buttons space-x-5'>
                     <Button type='submit'>{isEditing ? 'Guardar' : 'Editar'}</Button>

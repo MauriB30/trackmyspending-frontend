@@ -12,7 +12,7 @@ export default function PieLegend({ data, handleOpenLegend, categoryId }: Legend
     const categories = mapLegendData(data);
 
     return (
-        <ul className='legend-container w-fit text-2xl'>
+        <ul className='legend-container sm:text-2xl'>
             {categories.map((category) => (
                 <li key={category.id} className='legend-items'>
                     <div onClick={() => handleOpenLegend(category.id)} className='legend-item flex cursor-pointer items-center gap-3'>

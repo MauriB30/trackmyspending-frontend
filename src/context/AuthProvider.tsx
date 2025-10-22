@@ -6,7 +6,6 @@ import { AuthContext } from './AuthContext';
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    console.log(user);
 
     useEffect(() => {
         const checkSession = async () => {

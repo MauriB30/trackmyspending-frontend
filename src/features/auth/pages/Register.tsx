@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import z from 'zod';
 import Button from '../../../components/Button';
 import FormField from '../../../components/form/FormField';
@@ -11,7 +12,7 @@ const registerSchema = z
     .object({
         name: z.string().nonempty('El nombre es requerido').trim(),
         email: z.email('Email invalido').toLowerCase(),
-        password: z.string().min(6, 'La contraseña debe tener al menos 8 caracteres.').trim(),
+        password: z.string().min(8, 'La contraseña debe tener al menos 8 caracteres.').trim(),
         repeatPassword: z.string().trim(),
     })
     .refine((data) => data.password === data.repeatPassword, {
@@ -31,16 +32,20 @@ export default function Register() {
         formState: { errors },
     } = useForm<RegisterType>({ resolver: zodResolver(registerSchema) });
 
-    async function handleRegisterSubmit(data: RegisterType) {
-        const { message, success } = await registerUser(data.name, data.email, data.password);
+    async function handleRegisterSubmit(formData: RegisterType) {
+        const { name, email, password } = formData;
+
+        const { message, success } = await registerUser(name, email, password);
 
         if (!success) {
             setServerError(message);
         }
+
+        toast.success(message);
     }
 
     return (
-        <form className='flex w-[300px] flex-col gap-3' onSubmit={handleSubmit(handleRegisterSubmit)}>
+        <form className='flex w-full max-w-[500px] flex-col gap-5' onSubmit={handleSubmit(handleRegisterSubmit)}>
             <AuthTabs />
             <FormField register={register('name')} error={errors.name?.message} placeholder='Nombre' />
             <FormField register={register('email')} error={errors.email?.message} placeholder='Email' type='email' />

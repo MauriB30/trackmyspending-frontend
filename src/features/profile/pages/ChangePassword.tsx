@@ -9,7 +9,7 @@ import { apiChangePassword } from '../services/profileServices';
 
 const changePasswordSchema = z
     .object({
-        currentPassword: z.string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres'),
+        password: z.string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres'),
         newPassword: z.string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres'),
         newPasswordConfirm: z.string().min(8, 'Debe confirmar la nueva contraseña'),
     })
@@ -29,8 +29,8 @@ export default function ChangePassword() {
     } = useForm<changePasswordType>({ resolver: zodResolver(changePasswordSchema) });
 
     async function handleChangePassword(formData: changePasswordType) {
-        const { currentPassword, newPassword } = formData;
-        const { error } = await apiChangePassword(currentPassword, newPassword);
+        const { password, newPassword } = formData;
+        const { error } = await apiChangePassword(password, newPassword);
 
         if (error) {
             toast.error(error);
@@ -41,9 +41,9 @@ export default function ChangePassword() {
     }
 
     return (
-        <div className='bg-secondary w-full max-w-[900px] p-5'>
+        <div className='w-full max-w-[900px] border border-slate-700/50 bg-slate-800/30 p-8'>
             <form className='space-y-5' onSubmit={handleSubmit(handleChangePassword)}>
-                <FormField label='Contraseña actual' register={register('currentPassword')} type='password' error={errors.currentPassword?.message} />
+                <FormField label='Contraseña actual' register={register('password')} type='password' error={errors.password?.message} />
                 <FormField label='Nueva contraseña' register={register('newPassword')} type='password' error={errors.newPassword?.message} />
                 <FormField
                     label='Repita nueva contraseña'

@@ -22,15 +22,25 @@ export default function DatePicker() {
     useClickOutside(calendarRef, () => setOpenCalendar(false));
 
     return (
-        <div ref={calendarRef} className='bg-terceary relative flex w-fit items-center gap-1 rounded-lg px-3 py-2 text-white'>
+        <div
+            ref={calendarRef}
+            onClick={() => setOpenCalendar((prev) => !prev)}
+            className='text-secondaryFont relative w-full cursor-pointer rounded-lg border border-slate-700/50 bg-slate-800/30 px-3 py-2'
+        >
             <div className='flex'>
-                <Input placeholder='Ingrese fecha' className='w-[120px]' value={formatDate(today.day, today.month, today.year)} readOnly />
-                <span onClick={() => setOpenCalendar((prev) => !prev)} className='cursor-pointer'>
+                <Input
+                    placeholder='Ingrese fecha'
+                    className='cursor-pointer border-none bg-transparent text-white'
+                    value={formatDate(today.day, today.month, today.year)}
+                    readOnly
+                />
+                <span>
                     <CalendarMonthOutlinedIcon />
                 </span>
             </div>
+
             {openCalendar && (
-                <div className='absolute top-12 right-0'>
+                <div className='absolute top-12 right-0 z-10'>
                     <Calendar today={today} setToday={setToday} setOpenCalendar={setOpenCalendar} />
                 </div>
             )}

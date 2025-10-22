@@ -42,7 +42,7 @@ export default function Login() {
     }
 
     return (
-        <form className='flex w-[300px] flex-col gap-3' onSubmit={handleSubmit(handleLoginSubmit)}>
+        <form className='flex w-full max-w-[500px] flex-col gap-5' onSubmit={handleSubmit(handleLoginSubmit)}>
             <AuthTabs />
             <FormField register={register('email')} error={errors.email?.message} placeholder='Email' type='email' />
             <PasswordField register={register('password')} error={errors.password?.message} placeholder='Contraseña' />
@@ -51,7 +51,9 @@ export default function Login() {
                 <CheckBox checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
                 <p>Recuérdame</p>
             </div>
-            <Button type='submit'>{isSubmitting ? <CircularProgress size={24} color='inherit' /> : 'Acceder'}</Button>
+            <Button type='submit' className='flex items-center justify-center'>
+                {isSubmitting ? <CircularProgress size={24} color='inherit' /> : 'Acceder'}
+            </Button>
 
             <div className='flex flex-col gap-2'>
                 {serverError && <p className='text-error text-center'>{serverError}</p>}

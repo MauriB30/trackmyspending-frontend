@@ -8,7 +8,7 @@ interface Props {
 }
 
 const colors = {
-    positive: 'text-green-500',
+    positive: 'text-emerald-400',
     negative: 'text-red-500',
     default: '',
 };
@@ -22,10 +22,10 @@ export default function SummaryCard({ title, value, isCurrency, balance, isclick
 
     return (
         <div
-            className={`bg-background flex flex-col rounded-lg py-5 text-center ${textColor} ${isclickable ? 'cursor-pointer' : ''} ${isActive ? 'border-buttonActive border-2' : ''}`}
+            className={`flex flex-col rounded-lg border py-5 text-center text-white ${isclickable ? 'cursor-pointer' : ''} ${isActive ? 'border-slate-600/50 bg-slate-700/50' : 'border-slate-700/50 bg-slate-800/30'}`}
         >
-            <span>{isCurrency ? `$${formatNumber(value)}` : formatNumber(value)}</span>
-            <span>{title}</span>
+            <span className={`text-2xl font-bold ${textColor}`}>{isCurrency ? `$${formatNumber(value)}` : formatNumber(value)}</span>
+            <span className='text-secondaryFont'>{title}</span>
         </div>
     );
 }

@@ -1,3 +1,5 @@
+import { createTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import type { DefaultizedPieValueType } from '@mui/x-charts';
 import { pieArcLabelClasses, PieChart } from '@mui/x-charts/PieChart';
 
@@ -17,29 +19,46 @@ function calculatePercentage(params: DefaultizedPieValueType, totalExpenses: num
     return percentage.toFixed(2);
 }
 
+const theme = createTheme({
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 960,
+            lg: 1280,
+            xl: 1920,
+        },
+    },
+});
+
 export default function PieChartContainer({ totalExpenses, data }: Props) {
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const size = {
+        width: isSmallScreen ? 200 : 350,
+        height: isSmallScreen ? 200 : 350,
+    };
     return (
         <div>
             <PieChart
                 sx={{
                     [`& .${pieArcLabelClasses.root}`]: {
                         fill: 'white', // color de los numeros de adentro del arco.
-                        fontSize: '25px', // tamaño de la fuente de los numeros.
+                        font: 'bold',
                     },
                     '& path': {
                         stroke: 'black', // color del borde.
                         strokeWidth: 1, // ancho del borde.
                     },
                 }}
-                width={500}
-                height={400}
+                {...size}
                 hideLegend
                 slotProps={{ legend: { sx: { color: 'white', fontSize: '20px' } } }} // color del texto de los nombres de las etiquetas.
                 series={[
                     {
                         arcLabel: (value) => `${calculatePercentage(value, totalExpenses)}%`, // funcion que calcula el porcentaje de cada valor.
-                        arcLabelRadius: '65%',
-                        arcLabelMinAngle: 20,
+                        arcLabelRadius: '85%',
+                        arcLabelMinAngle: 1,
                         data,
                     },
                 ]}

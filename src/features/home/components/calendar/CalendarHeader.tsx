@@ -22,7 +22,7 @@ export default function CalendarHeader({ handleSelectMonth, setIsOpenMonth, setI
                 <span
                     ref={monthButtonRef}
                     onClick={() => setIsOpenMonth((prev) => !prev)}
-                    className='hover:text-buttonActive w-20 cursor-pointer text-center'
+                    className='hover:text-buttonActive w-20 cursor-pointer text-center text-white'
                 >
                     {month.name}
                 </span>

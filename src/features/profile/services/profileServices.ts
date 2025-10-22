@@ -5,10 +5,10 @@ interface ProfileResponseApi {
     error: string | null;
 }
 
-export async function apiChangePassword(currentPassword: string, newPassword: string): Promise<ProfileResponseApi> {
+export async function apiChangePassword(password: string, newPassword: string): Promise<ProfileResponseApi> {
     try {
         await api.put('/user/me/change-password', {
-            currentPassword,
+            password,
             newPassword,
         });
         return { error: null };

@@ -19,7 +19,7 @@ export async function apiLogin(email: string, password: string): Promise<LoginRe
             }
         }
 
-        return { error: 'Ocurrió un error inesperado' };
+        return { error: 'Ocurrió un error inesperado, Inténtalo de nuevo más tarde.' };
     }
 }
 
@@ -44,11 +44,11 @@ export async function apiRegister(name: string, email: string, password: string)
     } catch (error) {
         console.log(error);
         if (error instanceof AxiosError) {
-            if (error.response?.status === 400) {
-                return { success: false, message: error.response.data };
+            if (error.response?.status === 409) {
+                return { success: false, message: 'El email ya está registrado.' };
             }
         }
-        return { success: false, message: 'Ocurrió un error inesperado' };
+        return { success: false, message: 'Ocurrió un error inesperado, Inténtalo de nuevo más tarde.' };
     }
 }
 

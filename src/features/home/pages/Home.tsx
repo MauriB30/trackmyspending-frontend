@@ -70,6 +70,20 @@ const data = [
             { id: 14, category: 'Pantalones', amount: 650 },
         ],
     },
+    {
+        id: 5,
+        category: 'Salud',
+        amount: 3000,
+    },
+    {
+        id: 6,
+        category: 'Educación',
+        amount: 1500,
+        subcategories: [
+            { id: 15, category: 'Cursos Online', amount: 1000 },
+            { id: 16, category: 'Libros', amount: 500 },
+        ],
+    },
 ];
 
 export default function Home() {
@@ -91,25 +105,27 @@ export default function Home() {
     }, [categoryId]);
 
     return (
-        <div className='bg-secondary flex h-full flex-col gap-5 p-5'>
-            <div className='flex items-center gap-5 self-end text-base'>
+        <div className='text-secondaryFont flex h-full flex-col gap-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+            <div className='flex flex-col items-center gap-2 sm:flex-row'>
                 <label>Desde:</label>
                 <DatePicker />
                 <label>Hasta:</label>
                 <DatePicker />
             </div>
 
-            <div className='grid grid-cols-4 gap-2'>
+            <div className='grid gap-2 lg:grid-cols-2'>
                 <SummaryCard title='Ingresos' value={500000} isCurrency balance='positive' isclickable={true} />
                 <SummaryCard title='Gastos' value={totalExpenses} isCurrency balance='negative' isclickable={true} isActive={true} />
                 <SummaryCard title='Balance' value={500000 - totalExpenses} isCurrency balance='default' />
                 <SummaryCard title='Transacciones' value={231} balance='default' />
             </div>
 
-            <div className='text-secondaryFont relative grid h-full grid-cols-3 items-center'>
-                <h2 className='text-right'>Gastos Totales</h2>
-                <PieChartContainer totalExpenses={totalExpenses} data={chartData} />
-                <PieLegend data={data} handleOpenLegend={handleOpenLegend} categoryId={categoryId} />
+            <div className='relative h-full space-y-10 items-center rounded-lg border-slate-700/50 bg-slate-800/30 p-5'>
+                <h2 className='text-center text-2xl lg:text-left'>Gastos Totales</h2>
+                <div className='flex h-full flex-col items-center justify-center gap-5 sm:h-auto lg:flex-row'>
+                    <PieChartContainer totalExpenses={totalExpenses} data={chartData} />
+                    <PieLegend data={data} handleOpenLegend={handleOpenLegend} categoryId={categoryId} />
+                </div>
             </div>
         </div>
     );

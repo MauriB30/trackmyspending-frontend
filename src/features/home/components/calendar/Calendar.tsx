@@ -65,7 +65,7 @@ export default function Calendar({ today, setToday, setOpenCalendar }: CalendarP
     }
 
     return (
-        <div className='bg-background relative space-y-5 rounded p-3'>
+        <div className='relative space-y-5 rounded border border-slate-700/50 bg-slate-800 p-3 backdrop-blur-xl'>
             <CalendarHeader
                 handleSelectMonth={handleSelectMonth}
                 setIsOpenMonth={setIsOpenMonth}

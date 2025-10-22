@@ -1,7 +1,7 @@
 import type { IExpense } from '../pages/Home';
 
-const COLORS = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
-const SUBCOLORS = ['#FF9AA2', '#9AD0F5', '#FFE29A', '#A0E7E5', '#D1B3FF'];
+const COLORS = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#00FF00']; 
+const SUBCOLORS = ['#FF9AA2', '#9AD0F5', '#FFE29A', '#A0E7E5', '#D1B3FF', '#FFBE8C', '#99FF99'];
 
 export function mapLegendData(data: IExpense[]) {
     return data.map((item, index) => ({

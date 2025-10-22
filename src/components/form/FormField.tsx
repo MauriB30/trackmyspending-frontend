@@ -10,8 +10,8 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export default function FormField({ register, label, type = 'text', placeholder = '', error, ...props }: Props) {
     return (
-        <div className='relative'>
-            {label && <label className='mb-4'>{label}</label>}
+        <div className='flex flex-col gap-3'>
+            {label && <label>{label}</label>}
             <Input {...register} type={type} placeholder={placeholder} {...props} className='p-2' />
             {error && <p className='text-error text-sm'>{error}</p>}
         </div>

@@ -24,7 +24,7 @@ export default function RenderDays({ selectedYear, selectedMonth, handlePickDay 
             {days.map((day) => (
                 <li
                     key={day}
-                    className={`hover:bg-buttonActive cursor-pointer rounded-full text-center ${
+                    className={`hover:bg-buttonActive cursor-pointer rounded-full text-center text-white ${
                         isToday(day, selectedMonth.id, selectedYear) ? 'bg-buttonActive' : ''
                     }`}
                     onClick={() => handlePickDay(day)}
