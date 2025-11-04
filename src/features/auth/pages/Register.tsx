@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -29,7 +30,7 @@ export default function Register() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { isSubmitting, errors },
     } = useForm<RegisterType>({ resolver: zodResolver(registerSchema) });
 
     async function handleRegisterSubmit(formData: RegisterType) {
@@ -56,7 +57,9 @@ export default function Register() {
                 placeholder='Repita su contraseña'
                 type='password'
             />
-            <Button type='submit'>Crear</Button>
+            <Button type='submit' className='flex items-center justify-center'>
+                {isSubmitting ? <CircularProgress size={24} color='inherit' /> : 'Acceder'}
+            </Button>
 
             {serverError && <p className='text-error text-center'>{serverError}</p>}
         </form>

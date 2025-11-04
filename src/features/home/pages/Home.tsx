@@ -120,9 +120,9 @@ export default function Home() {
                 <SummaryCard title='Transacciones' value={231} balance='default' />
             </div>
 
-            <div className='relative h-full space-y-10 items-center rounded-lg border-slate-700/50 bg-slate-800/30 p-5'>
+            <div className='relative h-full items-center space-y-10 rounded-lg border border-slate-700/50 bg-slate-800/30 p-5'>
                 <h2 className='text-center text-2xl lg:text-left'>Gastos Totales</h2>
-                <div className='flex h-full flex-col items-center justify-center gap-5 sm:h-auto lg:flex-row'>
+                <div className='flex  flex-col items-center justify-center gap-5 sm:h-auto lg:flex-row'>
                     <PieChartContainer totalExpenses={totalExpenses} data={chartData} />
                     <PieLegend data={data} handleOpenLegend={handleOpenLegend} categoryId={categoryId} />
                 </div>

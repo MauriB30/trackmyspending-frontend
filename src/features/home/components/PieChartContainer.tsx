@@ -35,8 +35,8 @@ export default function PieChartContainer({ totalExpenses, data }: Props) {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const size = {
-        width: isSmallScreen ? 200 : 350,
-        height: isSmallScreen ? 200 : 350,
+        width: isSmallScreen ? 250 : 350,
+        height: isSmallScreen ? 250 : 350,
     };
     return (
         <div>

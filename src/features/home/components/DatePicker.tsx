@@ -19,15 +19,12 @@ export default function DatePicker() {
     });
 
     const calendarRef = useRef(null);
-    useClickOutside(calendarRef, () => setOpenCalendar(false));
+    const calendarTriggerRef = useRef(null);
+    useClickOutside(calendarRef, () => setOpenCalendar(false), calendarTriggerRef);
 
     return (
-        <div
-            ref={calendarRef}
-            onClick={() => setOpenCalendar((prev) => !prev)}
-            className='text-secondaryFont relative w-full cursor-pointer rounded-lg border border-slate-700/50 bg-slate-800/30 px-3 py-2'
-        >
-            <div className='flex'>
+        <div className='text-secondaryFont relative w-full cursor-pointer rounded-lg border border-slate-700/50 bg-slate-800/30 px-3 py-2'>
+            <div className='flex' ref={calendarTriggerRef} onClick={() => setOpenCalendar((prev) => !prev)}>
                 <Input
                     placeholder='Ingrese fecha'
                     className='cursor-pointer border-none bg-transparent text-white'
@@ -40,7 +37,7 @@ export default function DatePicker() {
             </div>
 
             {openCalendar && (
-                <div className='absolute top-12 right-0 z-10'>
+                <div className='absolute top-12 right-0 z-10' ref={calendarRef}>
                     <Calendar today={today} setToday={setToday} setOpenCalendar={setOpenCalendar} />
                 </div>
             )}

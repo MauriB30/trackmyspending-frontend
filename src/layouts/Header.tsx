@@ -10,7 +10,7 @@ export default function Header({ openBar }: HeaderProps) {
             <button onClick={openBar} className='cursor-pointer sm:hidden'>
                 <MenuIcon className='text-secondaryFont' />
             </button>
-            <h1 className='text-3xl text-white'>Track my spending</h1>
+            <h1 className='text-2xl sm:text-3xl text-white'>Track my spending</h1>
         </header>
     );
 }

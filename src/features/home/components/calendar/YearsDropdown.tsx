@@ -2,7 +2,7 @@ import type { RefObject } from 'react';
 import { getYearsAround } from './calendarHelpers';
 
 interface Props {
-    containerRef: RefObject<HTMLDivElement | null>;
+    yearMenuRef: RefObject<HTMLDivElement | null>;
     isOpen: boolean;
     selectedMonth: number;
     onSelect: (year: number, monthId: number) => void;
@@ -11,15 +11,16 @@ interface Props {
 const actualYear = new Date().getFullYear();
 const yearsAround = getYearsAround(actualYear);
 
-export default function YearsDropdown({ containerRef, isOpen, onSelect, selectedMonth }: Props) {
+export default function YearsDropdown({ yearMenuRef, isOpen, onSelect, selectedMonth }: Props) {
     console.log('render yearsDropdown');
+    console.log(yearsAround);
 
     return (
         <>
             {isOpen && (
                 <div
-                    ref={containerRef}
-                    className={`bg-secondary absolute left-1 grid w-[300px] grid-cols-3 gap-2 rounded p-1 transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+                    ref={yearMenuRef}
+                    className={`absolute left-1 grid w-[300px] grid-cols-3 gap-2 rounded border border-slate-700/50 bg-slate-800/95 p-1 text-white shadow-lg backdrop-blur-sm transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
                 >
                     {yearsAround.map((yearAround) => (
                         <button

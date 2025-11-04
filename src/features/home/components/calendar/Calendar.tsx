@@ -15,13 +15,13 @@ export default function Calendar({ today, setToday, setOpenCalendar }: CalendarP
     const [isOpenMonth, setIsOpenMonth] = useState(false);
     const [isOpenYear, setIsOpenYear] = useState(false);
 
-    const dropdownMonthRef = useRef(null);
-    const dropdownMonthButtonRef = useRef(null);
-    const dropdownYearRef = useRef(null);
-    const dropdownYearButtonRef = useRef(null);
+    const monthMenuRef = useRef(null);
+    const monthTriggerRef = useRef(null);
+    const yearMenuRef = useRef(null);
+    const yearTriggerRef = useRef(null);
 
-    useClickOutside(dropdownMonthRef, () => setIsOpenMonth(false), dropdownMonthButtonRef);
-    useClickOutside(dropdownYearRef, () => setIsOpenYear(false), dropdownYearButtonRef);
+    useClickOutside(monthMenuRef, () => setIsOpenMonth(false), monthTriggerRef);
+    useClickOutside(yearMenuRef, () => setIsOpenYear(false), yearTriggerRef);
 
     function handleSelectMonth(monthId: number) {
         if (monthId === -1) {
@@ -72,14 +72,14 @@ export default function Calendar({ today, setToday, setOpenCalendar }: CalendarP
                 setIsOpenYear={setIsOpenYear}
                 month={selectedMonth}
                 year={selectedYear}
-                monthButtonRef={dropdownMonthButtonRef}
-                yearButtonRef={dropdownYearButtonRef}
+                monthTriggerRef={monthTriggerRef}
+                yearTriggerRef={yearTriggerRef}
             />
 
             <hr className='' />
 
-            <MonthsDropdown months={months} ref={dropdownMonthRef} isOpen={isOpenMonth} handleSelectMonth={handleSelectMonth} />
-            <YearsDropdown containerRef={dropdownYearRef} isOpen={isOpenYear} selectedMonth={selectedMonth.id} onSelect={handleSelectYear} />
+            <MonthsDropdown months={months} monthMenuRef={monthMenuRef} isOpen={isOpenMonth} handleSelectMonth={handleSelectMonth} />
+            <YearsDropdown yearMenuRef={yearMenuRef} isOpen={isOpenYear} selectedMonth={selectedMonth.id} onSelect={handleSelectYear} />
             <WeekDays />
             <RenderDays selectedYear={selectedYear} selectedMonth={selectedMonth} handlePickDay={handlePickDay} />
         </div>

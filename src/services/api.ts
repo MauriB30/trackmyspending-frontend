@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://trackmyspending-backend.onrender.com/api';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const api = axios.create({
     baseURL: BASE_URL,
@@ -13,7 +13,7 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-        if (originalRequest.url?.endsWith('/auth/refresh')) {
+        if (!originalRequest.url?.endsWith('/user/me')) {
             return Promise.reject(error);
         }
 

@@ -9,16 +9,12 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         const checkSession = async () => {
-            try {
-                const currentUser = await apiCheckSession();
-                if (currentUser) {
-                    setUser(currentUser);
-                }
-            } catch (error) {
-                console.error('Error checking session:', error);
-            } finally {
-                setIsLoading(false);
+            const currentUser = await apiCheckSession();
+            if (currentUser) {
+                setUser(currentUser);
             }
+
+            setIsLoading(false);
         };
         checkSession();
     }, []);

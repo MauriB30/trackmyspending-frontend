@@ -1,17 +1,20 @@
 import type { RefObject } from 'react';
 
 interface Props {
-    ref: RefObject<HTMLDivElement | null>;
+    monthMenuRef: RefObject<HTMLDivElement | null>;
     isOpen: boolean;
     months: { id: number; name: string }[];
     handleSelectMonth: (monthId: number) => void;
 }
 
-export default function MonthsDropdown({ ref, isOpen, months, handleSelectMonth }: Props) {
+export default function MonthsDropdown({ monthMenuRef, isOpen, months, handleSelectMonth }: Props) {
     return (
         <>
             {isOpen && (
-                <div ref={ref} className='bg-secondary absolute left-1 grid w-[300px] grid-cols-3 gap-2 rounded p-1'>
+                <div
+                    ref={monthMenuRef}
+                    className='absolute left-1 grid w-[300px] grid-cols-3 gap-2 rounded border border-slate-700/50 bg-slate-800/95 p-1 text-white shadow-lg backdrop-blur-sm'
+                >
                     {months.map((month) => (
                         <span
                             key={month.id}

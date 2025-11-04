@@ -39,14 +39,18 @@ export function getNextDays(year: number, numberMonth: number) {
 
 export function getYearsAround(actualYear: number) {
     const pastYears = Array.from({ length: 5 }, (_, index) => ({
-        id: index,
+        id: 5 - (index + 1),
         year: actualYear - (index + 1),
     })).reverse();
 
+    console.log(pastYears);
+
     const nextYears = Array.from({ length: 5 }, (_, index) => ({
-        id: index,
+        id: 5 + (index + 1),
         year: actualYear + (index + 1),
     }));
+
+    console.log(nextYears);
     return [...pastYears, { id: 5, year: actualYear }, ...nextYears];
 }
 

@@ -8,11 +8,11 @@ interface Props {
     setIsOpenYear: React.Dispatch<React.SetStateAction<boolean>>;
     month: Month;
     year: number;
-    monthButtonRef: React.RefObject<null>;
-    yearButtonRef: React.RefObject<null>;
+    monthTriggerRef: React.RefObject<null>;
+    yearTriggerRef: React.RefObject<null>;
 }
 
-export default function CalendarHeader({ handleSelectMonth, setIsOpenMonth, setIsOpenYear, month, year, monthButtonRef, yearButtonRef }: Props) {
+export default function CalendarHeader({ handleSelectMonth, setIsOpenMonth, setIsOpenYear, month, year, monthTriggerRef, yearTriggerRef }: Props) {
     return (
         <div className='calendarHeader flex justify-between'>
             <div className='flex gap-2'>
@@ -20,9 +20,12 @@ export default function CalendarHeader({ handleSelectMonth, setIsOpenMonth, setI
                     <KeyboardArrowLeftIcon width='15' />
                 </button>
                 <span
-                    ref={monthButtonRef}
-                    onClick={() => setIsOpenMonth((prev) => !prev)}
-                    className='hover:text-buttonActive w-20 cursor-pointer text-center text-white'
+                    ref={monthTriggerRef}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsOpenMonth((prev) => !prev);
+                    }}
+                    className='hover:text-buttonActive cursor-pointer text-center text-white'
                 >
                     {month.name}
                 </span>
@@ -30,7 +33,14 @@ export default function CalendarHeader({ handleSelectMonth, setIsOpenMonth, setI
                     <KeyboardArrowRightIcon width='15' />
                 </button>
             </div>
-            <span ref={yearButtonRef} onClick={() => setIsOpenYear((prev) => !prev)} className='cursor-pointer'>
+            <span
+                ref={yearTriggerRef}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpenYear((prev) => !prev);
+                }}
+                className='cursor-pointer'
+            >
                 {year}
             </span>
         </div>
